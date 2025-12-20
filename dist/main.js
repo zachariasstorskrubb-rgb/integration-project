@@ -1,10 +1,10 @@
 console.log('VITE IS SERVING THIS FILE');
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { Box3, Vector3 } from 'three';
-import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/loaders/GLTFLoader.js';
+import { CSS2DRenderer, CSS2DObject } from 'https://cdn.jsdelivr.net/npm/three@0.160/examples/jsm/renderers/CSS2DRenderer.js';
+
 
 // ---- Scene ----
 const scene = new THREE.Scene();
@@ -83,9 +83,9 @@ loader.load('/model.glb', (gltf) => {
   scene.add(model);
 
   // Center & scale
-  const box = new Box3().setFromObject(model);
-  const center = box.getCenter(new Vector3());
-  const size = box.getSize(new Vector3());
+  const box = new THREE.Box3().setFromObject(model);
+  const center = box.getCenter(new THREE.Vector3());
+  const size = box.getSize(new THREE.Vector3());
 
   model.position.x -= center.x;
   model.position.z -= center.z;
