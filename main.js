@@ -1,6 +1,6 @@
 console.log('VITE IS SERVING THIS FILE');
 
-import * as THREE from 'three';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Box3, Vector3 } from 'three';
