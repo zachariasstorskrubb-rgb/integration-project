@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "OrbitControls": "https://unpkg.com/three@0.138.0/examples/jsm/controls/OrbitControls.js"
+            }
+        }
+    </script>
+  <meta charset="UTF-8" />
+  <title>3D Scan Viewer</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+  <script type="module" src="./main.js"></script>
+  <div id="tooltip" style="position:absolute; display:none; background:white; padding:10px;"></div>
+  <div id="info-panel" style="
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 250px;
+  background: rgba(255,255,255,0.95);
+  padding: 10px;
+  border-radius: 8px;
+  display: none;
+  z-index: 10;
+">
+</div>
+</body>
+</html>
