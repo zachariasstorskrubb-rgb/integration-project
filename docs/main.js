@@ -78,7 +78,7 @@ function showInfoPanel(content) {
 // ---- Load model ----
 let model;
 const loader = new GLTFLoader();
-loader.load('/model.glb', (gltf) => {
+loader.load('./model.glb', (gltf) => {
   model = gltf.scene;
   scene.add(model);
 
@@ -166,3 +166,34 @@ function animate() {
   labelRenderer.render(scene, camera);
 }
 animate();
+
+addFloatingLabel(
+  new THREE.Vector3(-0.04, 0, 0.01),
+  `The memorial is titled “Utsträckta händer” (Outstretched Hands) and was created to commemorate Olof Palme and his work for peace and international solidarity. 
+  Olof Palme, Prime Minister of Sweden, was murdered in Stockholm on 28 February 1986, an event that deeply affected Swedish society and remains one of the country’s most significant political tragedies. 
+  The sculpture is designed to be experienced from multiple angles, with each side presenting a different motif. 
+  One side shows numerous hands reaching outward, while the reverse depicts a handshake, symbolizing cooperation and reconciliation. 
+  The memorial was inaugurated in 1998 and is placed in a public setting, making it accessible as a site for remembrance and reflection.`,
+  'images/palme.jpg',
+  'images/tillminne.jpg'
+);
+
+addFloatingLabel(
+  new THREE.Vector3(-0.04, 0, 0.01),
+  `The memorial is titled “Utsträckta händer” (Outstretched Hands) and was created to commemorate Olof Palme and his work for peace and international solidarity. 
+  The sculpture is designed to be experienced from multiple angles, with each side presenting a different motif. 
+  One side shows numerous hands reaching outward, while the reverse depicts a handshake, reinforcing themes of cooperation and reconciliation. 
+  The memorial was inaugurated in 1998 and is situated in a public environment, making it accessible to visitors as a place for reflection and remembrance.`,
+  'images/stretchinghands.jpg',
+  'images/fred.jpg'
+);
+
+addFloatingLabel(
+  new THREE.Vector3(-0.04, 0, 0.01),
+  `The memorial is titled “Utsträckta händer” (Outstretched Hands) and stands as a lasting tribute to dialogue, solidarity, and peace. 
+  The work invites visitors to walk around it and experience its different sides, emphasizing that understanding and reconciliation require perspective. 
+  Rather than depicting a single moment or individual, the memorial focuses on universal human gestures, allowing it to remain relevant across generations. 
+  Located in a public space, it encourages reflection not only on Olof Palme’s legacy, but also on the responsibility of individuals and societies to continue striving for openness, empathy, and peaceful cooperation.`,
+  'images/stretchinghands.jpg',  // top image (reuse or replace if desired)
+  'images/fred.jpg'              // bottom image
+);
