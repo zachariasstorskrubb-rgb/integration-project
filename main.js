@@ -168,7 +168,7 @@ function animate() {
 animate();
 
 addFloatingLabel(
-  new THREE.Vector3(-0.04, 0, 0.01),
+  new THREE.Vector3(-0.085, 0.2, 0.01),
   `The memorial is titled “Utsträckta händer” (Outstretched Hands) and was created to commemorate Olof Palme and his work for peace and international solidarity. 
   Olof Palme, Prime Minister of Sweden, was murdered in Stockholm on 28 February 1986, an event that deeply affected Swedish society and remains one of the country’s most significant political tragedies. 
   The sculpture is designed to be experienced from multiple angles, with each side presenting a different motif. 
@@ -179,21 +179,21 @@ addFloatingLabel(
 );
 
 addFloatingLabel(
-  new THREE.Vector3(-0.04, 0, 0.01),
-  `The memorial is titled “Utsträckta händer” (Outstretched Hands) and was created to commemorate Olof Palme and his work for peace and international solidarity. 
-  The sculpture is designed to be experienced from multiple angles, with each side presenting a different motif. 
-  One side shows numerous hands reaching outward, while the reverse depicts a handshake, reinforcing themes of cooperation and reconciliation. 
-  The memorial was inaugurated in 1998 and is situated in a public environment, making it accessible to visitors as a place for reflection and remembrance.`,
-  'images/stretchinghands.jpg',
-  'images/fred.jpg'
+  new THREE.Vector3(-0.145, 0.4, -0.1),
+  `This sculpture is a powerful visual representation of human connection and solidarity. 
+  On the front, two sides are covered with outstretched hands, symbolizing a yearning for understanding and mutual support. 
+  On the back, two hands are clasped in a handshake, representing reconciliation, cooperation, and trust. 
+  The work is dedicated to Olof Palme, celebrating his legacy as a peacekeeper who strived for dialogue and harmony across conflicts. 
+  The juxtaposition of reaching hands and the handshake invites viewers to reflect on both the struggle and the resolution inherent in human relationships, and the enduring impact of leaders who work for peace.`,
+  'images/stretchinghands.jpg', // top image
+  'images/fred.jpg'             // bottom image
 );
-
 addFloatingLabel(
-  new THREE.Vector3(-0.04, 0, 0.01),
-  `The memorial is titled “Utsträckta händer” (Outstretched Hands) and stands as a lasting tribute to dialogue, solidarity, and peace. 
-  The work invites visitors to walk around it and experience its different sides, emphasizing that understanding and reconciliation require perspective. 
-  Rather than depicting a single moment or individual, the memorial focuses on universal human gestures, allowing it to remain relevant across generations. 
-  Located in a public space, it encourages reflection not only on Olof Palme’s legacy, but also on the responsibility of individuals and societies to continue striving for openness, empathy, and peaceful cooperation.`,
-  'images/stretchinghands.jpg',  // top image (reuse or replace if desired)
-  'images/fred.jpg'              // bottom image
+  new THREE.Vector3(0.12, 0.23, -0.11),
+  `Sculptor Pye Engström was tasked with designing the memorial to honor the legacy of Olof Palme. 
+  Completed in 1998, her work thoughtfully captures the duality of remembrance and hope through symbolic imagery. 
+  Engström, a renowned Swedish sculptor born in 1928, has a long-standing career exploring themes of human connection and social engagement. 
+  Her contribution to this memorial reflects her commitment to conveying emotion, dialogue, and reconciliation through sculptural form, inviting viewers to engage deeply with both the aesthetic and historical significance of the site.`,
+  'images/pye.jpg',   // top image
+  'images/pye2.jpg'   // bottom image
 );
