@@ -63,18 +63,6 @@ infoPanel.style.display = 'none';
 infoPanel.style.zIndex = '20';
 document.body.appendChild(infoPanel);
 
-function showInfoPanel(content) {
-  infoPanel.style.display = 'block';
-  infoPanel.innerHTML = `
-    ${content.imgTop ? `<img src="${content.imgTop}" style="width:100%; border-radius:4px; margin-bottom:10px;">` : ''}
-    <p>${content.text}</p>
-    ${content.imgBottom ? `<img src="${content.imgBottom}" style="width:100%; border-radius:4px; margin-top:10px;">` : ''}
-  `;
-  
-  infoPanel.addEventListener('click', (event) => {
-    event.stopPropagation();
-  });
-  }
 // ---- Load model ----
 let model;
 const loader = new GLTFLoader();
@@ -96,41 +84,49 @@ loader.load('./rock2.glb', (gltf) => {
 
 });
 
-function addFloatingLabel(position, text, imgTop, imgBottom) {
+function addFloatingLabel(position, text) {
   const div = document.createElement('div');
   div.className = 'label';
 
-  // Style the info icon
-  div.style.width = '24px';
+  // Base styles (info icon)
+  div.style.minWidth = '24px';
   div.style.height = '24px';
+  div.style.padding = '0 8px';
   div.style.background = 'black';
   div.style.color = 'white';
   div.style.fontWeight = 'bold';
-  div.style.borderRadius = '50%';
-  div.style.textAlign = 'center';
-  div.style.lineHeight = '24px';
-  div.style.cursor = 'pointer';
+  div.style.borderRadius = '12px';
+  div.style.display = 'flex';
+  div.style.alignItems = 'center';
+  div.style.justifyContent = 'center';
+  div.style.whiteSpace = 'nowrap';
+  div.style.cursor = 'default';
   div.style.userSelect = 'none';
   div.style.pointerEvents = 'auto';
+  div.style.transition = 'all 0.2s ease';
+
+  // Initial content
   div.textContent = 'i';
 
   const label = new CSS2DObject(div);
-  label.position.copy(position); // set 3D position
+  label.position.copy(position);
   scene.add(label);
 
-  // Prevent OrbitControls from interfering
+  // Prevent OrbitControls interaction
   div.addEventListener('pointerdown', (event) => event.stopPropagation());
 
-  // Click event to show info panel
-  div.addEventListener('click', () => {
-    showInfoPanel({
-      text: text,
-      imgTop: imgTop,
-      imgBottom: imgBottom
-    });
+  // Hover behavior
+  div.addEventListener('mouseenter', () => {
+    div.textContent = text;
+    div.style.borderRadius = '6px';
+    div.style.justifyContent = 'flex-start';
   });
 
-  
+  div.addEventListener('mouseleave', () => {
+    div.textContent = 'i';
+    div.style.borderRadius = '12px';
+    div.style.justifyContent = 'center';
+  });
 
   return label;
 }
@@ -166,3 +162,9 @@ function animate() {
   labelRenderer.render(scene, camera);
 }
 animate();
+
+
+addFloatingLabel(
+  new THREE.Vector3(0, 0, 0),
+  `Adidas Handball Spezial is a line of shoes released by Adidas. As the name implies, the shoe was originally designed to be used in handball but has since transitioned to a lifestyle shoe. The shoe was originally released in 1979. The shoe features a full suede upper to allow smooth mobility, an enhanced heel cap to protect the foot, and a special sole that closely resembles a cleat to give it better traction.`
+);
