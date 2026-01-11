@@ -2,124 +2,336 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Zach's scans</title>
+  <title>Zach's Scans</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-    }
-
-    h1 {
-      text-align: center;
-      margin: 30px 0 10px;
-    }
-
-    h2 {
-      max-width: 1200px;
-      margin: 30px auto 10px;
-      padding: 0 20px;
-      font-size: 20px;
-      color: #333;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background: white;
-      border-radius: 10px;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(#3a5ca5, #1a92c2);
+      height: 100vh;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      text-decoration: none;
-      color: inherit;
+      color: #000;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-
-    .card img {
+    /* DESKTOP */
+    .desktop {
+      position: relative;
       width: 100%;
-      height: 160px;
-      object-fit: cover;
+      height: 100%;
+      padding: 15px;
+    }
+
+    /* ICONS */
+    .icon {
+      width: 100px;
+      text-align: center;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 20px;
+      user-select: none;
+    }
+
+    .icon img {
+      width: 70px;
+      height: 70px;
       display: block;
+      margin: 0 auto 6px;
     }
 
-    .card-content {
-      padding: 12px;
+    .icon span {
+      font-size: 13px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
     }
 
-    .card-content h3 {
-      margin: 0;
-      font-size: 16px;
+    /* ICON POSITIONS */
+    .icons-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      gap: 40px;
     }
+
+    .recycle-bin {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+
+    /* WINDOW */.window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 520px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  overflow: hidden; /* keep corners rounded */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  display: none;
+  flex-direction: column;
+
+  /* 🔹 Top “edge” / border */
+  border: 1px, rgb(0, 0, 0);
+}
+
+  .window-header {
+    position: top;
+    background: linear-gradient(#e9edf5, #cfd8e6);
+    padding: 6px 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #aaa;
+  }
+.close-btn {
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  right: 3px;
+  width: 44px;          /* wider */
+  height: 16px;         /* thinner */
+  background: linear-gradient(#dbdbdb, #a5a5a5);
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 14px;    /* vertical centering */
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #777777;
+  user-select: none;
+    text-shadow: 0 1px 1px rgba(1, 1, 1, 2);
+}
+    .close-btn:hover {
+      background: #c50f1f;
+    }
+
+    .window-content {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 80px);
+      gap: 20px;
+    }
+
+    .window-content a {
+      text-decoration: none;
+      color: black;
+    }
+
+    .window-content .icon {
+      color: black;
+    }
+
+      @keyframes iconFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .icon {
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
+  .icons-center .icon {
+    animation: iconFadeIn 0.6s ease-in forwards;
+  }
+
+  /* Stagger the icons slightly */
+  .icons-center .icon:nth-child(1) { animation-delay: 0.05s; }
+  .icons-center .icon:nth-child(2) { animation-delay: 0.15s; }
+  .icons-center .icon:nth-child(3) { animation-delay: 0.25s; }
+
+  /* Subtle Windows-style hover */
+    .icon:hover {
+      transform: translateY(-2px);
+    }
+    @keyframes windowOpen {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  .window-content .icon {
+  opacity: 0;               /* start hidden */
+  transform: scale(0.9);    /* optional small scale for animation */
+  animation: iconFadeIn 0.25s ease forwards;
+}
+
+.window-content .icon:nth-child(1) { animation-delay: 0.05s; }
+.window-content .icon:nth-child(2) { animation-delay: 0.25s; }
+.window-content .icon:nth-child(3) { animation-delay: 0.45s; }
+
+
+@keyframes iconFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+  .icons-center .icon {
+  opacity: 0;                  /* start invisible */
+  transform: scale(0.9);       /* optional scale for ease-in effect */
+  animation: desktopIconFade 0.5s ease forwards;
+}
+
+.icons-center .icon:nth-child(1) { animation-delay: 0.1s; }
+.icons-center .icon:nth-child(2) { animation-delay: 0.2s; }
+.icons-center .icon:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes desktopIconFade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+  .window.opening {
+    display: flex;
+    animation: windowOpen 0.15s ease-out forwards;
+  }
+.logo {
+  position: absolute;
+  top: 40px;             /* distance from the top of the page */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;            /* make sure it’s above the desktop background */
+  pointer-events: none;  /* so clicks pass through to folders */
+}
+
+.logo img {
+  max-width: 700px;      /* adjust size as needed */
+  height: auto;
+  display: block;
+}
   </style>
 </head>
 <body>
 
-  <h1>Zach's scans</h1>
+<div class="desktop">
+<div class="logo">
+  <img src="/integration-project/assets/logo-Kf4bmImF.png" alt="Site Logo">
+</div>
+  <!-- LEFT DESKTOP ICONS -->
+  <div class="icons-center">
+    <div class="icon" onclick="openWindow('outdoor')">
+      <img src="/integration-project/assets/outdoorscans-DvcFgzO3.png">
+      <span>Outdoors scans</span>
+    </div>
 
-  <!-- OUTDOOR SCANS -->
-  <h2>Outdoor scans</h2>
-  <div class="grid">
-    <a class="card" href="olof.html">
-      <img src="/integration-project/assets/olofPalmeSten-6vJa5yJ5.png" alt="Olof Palme memorial scan">
-      <div class="card-content">
-        <h3>Olof Palme memorial</h3>
-      </div>
-    </a>
+    <div class="icon" onclick="openWindow('shoes')">
+      <img src="/integration-project/assets/shoescans-XDuFTFHZ.png">
+      <span>Shoe scans</span>
+    </div>
 
-    <a class="card" href="rock.html">
-      <img src="/integration-project/assets/rock-BkrRsFYM.png" alt="Rock scan">
-      <div class="card-content">
-        <h3>Rock</h3>
-      </div>
-    </a>
-
-    <a class="card" href="horse.html">
-      <img src="/integration-project/assets/horse-DYhVdPwO.png" alt="Stone horse">
-      <div class="card-content">
-        <h3>Stone horse</h3>
-      </div>
-    </a>
+    <div class="icon" onclick="openWindow('objects')">
+      <img src="/integration-project/assets/smallobjectscans-CZsE9qYn.png">
+      <span>Small object scans</span>
+    </div>
   </div>
 
-  <!-- OBJECT SCANS -->
-  <h2>Object scans</h2>
-  <div class="grid">
-    <a class="card" href="christmas.html">
-      <img src="/integration-project/assets/krubba-CPE5IG1k.png" alt="Nativity scene">
-      <div class="card-content">
-        <h3>Nativity scene</h3>
-      </div>
-    </a>
-
-    <a class="card" href="shoe.html">
-      <img src="/integration-project/assets/shoe-Csfu81X-.png" alt="Red shoe">
-      <div class="card-content">
-        <h3>Red shoe</h3>
-      </div>
-    </a>
-
-    <a class="card" href="black-shoe.html">
-      <img src="/integration-project/assets/black-shoe-DPwfkUh8.png" alt="Black shoe">
-      <div class="card-content">
-        <h3>Black shoe</h3>
-      </div>
-    </a>
+  <!-- RECYCLE BIN -->
+   <div class="icon recycle-bin" onclick="openWindow('recycle')">
+    <img src="/integration-project/assets/trashcan-DwRYfFHZ.png">
+    <span>Recycle Bin</span>
   </div>
+
+  <!-- WINDOW -->
+  <div class="window" id="folderWindow">
+    <div class="window-header">
+      <span id="windowTitle">Folder</span>
+      <span class="close-btn" onclick="closeWindow()">✕</span>
+    </div>
+    <div class="window-content" id="windowContent"></div>
+  </div>
+
+</div>
+
+  <script>
+  const folders = {
+    outdoor: {
+      title: "Outdoors scans",
+      items: [
+        { name: "Olof Palme memorial.glb", href: "olof.html", icon: "images/oloficon.png" },
+        { name: "Rock.glb", href: "rock.html", icon: "images/rockicon.png" },
+        { name: "Stone horse.glb", href: "horse.html", icon: "images/horseicon.png" }
+      ]
+    },
+    shoes: {
+      title: "Shoe scans",
+      items: [
+        { name: "Boot.glb", href: "boot.html", icon: "images/booticon.png" },
+        { name: "Red shoe.glb", href: "shoe.html", icon: "images/shoeicon.png" },
+        { name: "Black shoe.glb", href: "black-shoe.html", icon: "images/blackshoeicon.png" }
+      ]
+    },
+    objects: {
+      title: "Small object scans",
+      items: [
+        { name: "Nativity scene.glb", href: "christmas.html", icon: "images/christmasicon.png" },
+        { name: "Cereal box.glb", href: "cereal.html", icon: "images/cerealicon.png" }
+      ]
+    },
+    recycle: {
+    title: "Recycle Bin",
+    items: [
+      { name: "Polaroid", href: "polaroid.html", icon: "images/polaroidicon.png" },
+      { name: "Microwave", href: "microwave.html", icon: "images/microwaveicon.png" },
+      { name: "Pill bottle", href: "pillbottle.html", icon: "images/pillbottleicon.png" }
+    ]
+  }
+};
+
+function openWindow(type) {
+  const data = folders[type];
+  const windowEl = document.getElementById("folderWindow");
+  const content = document.getElementById("windowContent");
+  const title = document.getElementById("windowTitle");
+
+  title.textContent = data.title;
+  content.innerHTML = "";
+
+  data.items.forEach(item => {
+    const a = document.createElement("a");
+    a.href = item.href;
+
+    const icon = document.createElement("div");
+    icon.className = "icon";
+    icon.innerHTML = `
+      <img src="${item.icon}">
+      <span>${item.name}</span>
+    `;
+
+    a.appendChild(icon);
+    content.appendChild(a);
+  });
+
+  // 🔑 RESET + SHOW + ANIMATE
+  windowEl.classList.remove("closing", "opening");
+  windowEl.style.display = "flex";     // ← THIS WAS MISSING
+  void windowEl.offsetWidth;           // force reflow
+  windowEl.classList.add("opening");
+}
+  function closeWindow() {
+    document.getElementById("folderWindow").style.display = "none";
+  }
+</script>
 
 </body>
 </html>
