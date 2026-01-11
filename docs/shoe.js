@@ -172,5 +172,5 @@ addFloatingLabel(
   new THREE.Vector3(0.07, 0.2, 0.05),
   `Adidas Handball Spezial is a line of shoes released by Adidas. As the name implies, the shoe was originally designed to be used in handball but has since transitioned to a lifestyle shoe. The shoe was originally released in 1979. The shoe features a full suede upper to allow smooth mobility, an enhanced heel cap to protect the foot, and a special sole that closely resembles a cleat to give it better traction.`,
   'images/handball.jpg',   // top image
-  'images/Adidas_Handb.jpg'   // bottom image
+  'images/Adidas_Handball_Spezial.jpg'   // bottom image
 );

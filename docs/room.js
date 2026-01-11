@@ -88,48 +88,61 @@ function addFloatingLabel(position, text) {
   const div = document.createElement('div');
   div.className = 'label';
 
-  // Base styles (info icon)
-  div.style.minWidth = '24px';
+  // Collapsed state — SAME centering as original code
+  div.style.width = '24px';
   div.style.height = '24px';
-  div.style.padding = '0 8px';
   div.style.background = 'black';
   div.style.color = 'white';
   div.style.fontWeight = 'bold';
-  div.style.borderRadius = '12px';
-  div.style.display = 'flex';
-  div.style.alignItems = 'center';
-  div.style.justifyContent = 'center';
-  div.style.whiteSpace = 'nowrap';
-  div.style.cursor = 'default';
+  div.style.fontSize = '14px';
+  div.style.borderRadius = '50%';
+  div.style.textAlign = 'center';
+  div.style.lineHeight = '24px';
+  div.style.padding = '0';
   div.style.userSelect = 'none';
   div.style.pointerEvents = 'auto';
   div.style.transition = 'all 0.2s ease';
 
-  // Initial content
   div.textContent = 'i';
 
   const label = new CSS2DObject(div);
   label.position.copy(position);
   scene.add(label);
 
-  // Prevent OrbitControls interaction
-  div.addEventListener('pointerdown', (event) => event.stopPropagation());
+  // Prevent OrbitControls interference
+  div.addEventListener('pointerdown', (e) => e.stopPropagation());
 
-  // Hover behavior
+  // Hover → expand
   div.addEventListener('mouseenter', () => {
     div.textContent = text;
-    div.style.borderRadius = '6px';
+
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
     div.style.justifyContent = 'flex-start';
+
+    div.style.width = 'auto';
+    div.style.height = 'auto';
+    div.style.padding = '6px 10px';
+    div.style.borderRadius = '6px';
+    div.style.lineHeight = 'normal';
   });
 
+  // Leave → collapse
   div.addEventListener('mouseleave', () => {
     div.textContent = 'i';
-    div.style.borderRadius = '12px';
-    div.style.justifyContent = 'center';
+
+    div.style.display = 'block';
+    div.style.width = '24px';
+    div.style.height = '24px';
+    div.style.padding = '0';
+    div.style.borderRadius = '50%';
+    div.style.textAlign = 'center';
+    div.style.lineHeight = '24px';
   });
 
   return label;
 }
+
 
 // ---- Resize ----
 window.addEventListener('resize', () => {
@@ -165,6 +178,6 @@ animate();
 
 
 addFloatingLabel(
-  new THREE.Vector3(0, 0, 0),
-  `Adidas Handball Spezial is a line of shoes released by Adidas. As the name implies, the shoe was originally designed to be used in handball but has since transitioned to a lifestyle shoe. The shoe was originally released in 1979. The shoe features a full suede upper to allow smooth mobility, an enhanced heel cap to protect the foot, and a special sole that closely resembles a cleat to give it better traction.`
+  new THREE.Vector3(0, 0.2, 0),
+  `This is a rock.`
 );

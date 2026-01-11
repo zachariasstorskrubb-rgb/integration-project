@@ -96,44 +96,65 @@ loader.load('./horse.glb', (gltf) => {
 
 });
 
-function addFloatingLabel(position, text, imgTop, imgBottom) {
+function addFloatingLabel(position, text) {
   const div = document.createElement('div');
   div.className = 'label';
 
-  // Style the info icon
+  // Collapsed state — SAME centering as original code
   div.style.width = '24px';
   div.style.height = '24px';
   div.style.background = 'black';
   div.style.color = 'white';
   div.style.fontWeight = 'bold';
+  div.style.fontSize = '14px';
   div.style.borderRadius = '50%';
   div.style.textAlign = 'center';
   div.style.lineHeight = '24px';
-  div.style.cursor = 'pointer';
+  div.style.padding = '0';
   div.style.userSelect = 'none';
   div.style.pointerEvents = 'auto';
+  div.style.transition = 'all 0.2s ease';
+
   div.textContent = 'i';
 
   const label = new CSS2DObject(div);
-  label.position.copy(position); // set 3D position
+  label.position.copy(position);
   scene.add(label);
 
-  // Prevent OrbitControls from interfering
-  div.addEventListener('pointerdown', (event) => event.stopPropagation());
+  // Prevent OrbitControls interference
+  div.addEventListener('pointerdown', (e) => e.stopPropagation());
 
-  // Click event to show info panel
-  div.addEventListener('click', () => {
-    showInfoPanel({
-      text: text,
-      imgTop: imgTop,
-      imgBottom: imgBottom
-    });
+  // Hover → expand
+  div.addEventListener('mouseenter', () => {
+    div.textContent = text;
+
+    div.style.display = 'flex';
+    div.style.alignItems = 'center';
+    div.style.justifyContent = 'flex-start';
+
+    div.style.width = 'auto';
+    div.style.height = 'auto';
+    div.style.padding = '6px 10px';
+    div.style.borderRadius = '6px';
+    div.style.lineHeight = 'normal';
   });
 
-  
+  // Leave → collapse
+  div.addEventListener('mouseleave', () => {
+    div.textContent = 'i';
+
+    div.style.display = 'block';
+    div.style.width = '24px';
+    div.style.height = '24px';
+    div.style.padding = '0';
+    div.style.borderRadius = '50%';
+    div.style.textAlign = 'center';
+    div.style.lineHeight = '24px';
+  });
 
   return label;
 }
+
 
 // ---- Resize ----
 window.addEventListener('resize', () => {
@@ -167,4 +188,5 @@ function animate() {
   labelRenderer.render(scene, camera);
 }
 animate();
+
 
