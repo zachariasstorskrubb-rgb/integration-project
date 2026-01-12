@@ -190,3 +190,7 @@ function animate() {
 animate();
 
 
+addFloatingLabel(
+  new THREE.Vector3(0, 0.2, 0),
+  `This is a stone horse in Visby.`
+);
